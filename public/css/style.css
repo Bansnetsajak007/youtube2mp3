@@ -1,0 +1,94 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* Top container styling */
+.topContainer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+.topContainer h1 {
+    font-size: 24px;
+}
+
+.topContainer h4 {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.topContainer div {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#viedoURl {
+    padding: 8px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    width: 70%;
+}
+
+#convert {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#convert:hover {
+    background-color: #0056b3;
+}
+
+/* Bottom container styling */
+.bottom-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.success, .errors {
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+.success {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.errors {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+#download-btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#download-btn:hover {
+    background-color: #0056b3;
+}
