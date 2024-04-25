@@ -2,7 +2,7 @@
 
 const axios = require('axios');
 const express = require('express');
-// const fetch = require('node-fetch');
+const { getVidTitle } = require('./utility.js');
 require("dotenv").config();
 
 const app = express();
@@ -14,41 +14,41 @@ app.use(express.static("public"));
 
 app.use(express.urlencoded({
     extended: true
-  }));
-  app.use(express.json());
+}));
+app.use(express.json());
 
 
-app.get("/" , (req,res) => {
+app.get("/", (req, res) => {
     res.render("app");
 });
 
-app.post("/convert-mp3", async (req,res) => {
+app.post("/convert-mp3", async (req, res) => {
 
     let viedoURL = req.body.viedoURL;
-     
-    if(viedoURL === undefined || viedoURL === '' || viedoURL === null) {
-        return res.render('app',{success : false , message : "Please enter youtube viedo url"})
+
+    if (viedoURL === undefined || viedoURL === '' || viedoURL === null) {
+        return res.render('app', { success: false, message: "Please enter youtube viedo url" })
     } else {
 
         const options = {
             method: 'GET',
             url: 'https://youtube-mp3-downloader2.p.rapidapi.com/ytmp3/ytmp3/',
             params: {
-              url: `${viedoURL}`
+                url: `${viedoURL}`
             },
             headers: {
                 "x-rapidapi-key": process.env.API_KEY,
                 "x-rapidapi-host": process.env.API_HOST
             }
-          };
+        };
 
-          try {
+        try {
             const response = await axios.request(options);
-            // console.log(response.data);
-            if(response) {
-                return res.render("app", {success : true, song_title : response.data.title, song_link : response.data.link});
-            } else{
-                return res.render("app" , {success : false , message : response.data.msg});
+            let titleResponse = await getVidTitle(response.data.videoid);
+            if (response) {
+                return res.render("app", { success: true, song_title: titleResponse.title, song_link: response.data.dlink });
+            } else {
+                return res.render("app", { success: false, message: response.data.msg });
             }
         } catch (error) {
             console.error(error);
@@ -57,6 +57,6 @@ app.post("/convert-mp3", async (req,res) => {
 
 });
 
-app.listen(PORT , () => {
+app.listen(PORT, () => {
     console.log(`server running at ${PORT}`);
 })
